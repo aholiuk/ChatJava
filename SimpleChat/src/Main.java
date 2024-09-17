@@ -10,6 +10,7 @@ public class Main {
     static Profile myProfile;
     static String message = "";
 
+    // function does not work as supposed and very hard coded
     public static void drawAppearance() {
         if (message.equals(null)) {
             for (int i = 0; i < height; i++) {
@@ -54,6 +55,7 @@ public class Main {
     }
 /////////////////////////////////////////////
 
+    // displays a menu with 4 main functions of the program
     public static void displayMainMenu() {
         System.out.print("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tWELCOME TO SIMPLE CHAT\n\n\n\n" +
                 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tWhat do you want to do today?\n\n" +
@@ -63,6 +65,7 @@ public class Main {
                 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t4.Play mini games\n");
     }
 
+    // executes the menu function
     public static void makeChoice() {
         int choice = scanner.nextInt();
         scanner.nextLine();
@@ -86,8 +89,30 @@ public class Main {
     }
 
     private static void playMiniGames() {
+        System.out.println("Choose a game:\n1.Rock Paper Scissors\n2.Tic Tac Toe");
+        scanner.nextLine();
+        int choice = scanner.nextInt();
+        switch (choice) {
+            case 1:
+                rockPaperScissors();
+                break;
+            case 2:
+                ticTacToe();
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid choice");
+        }
     }
 
+    private static void ticTacToe() {
+    }
+
+    private static void rockPaperScissors() {
+    }
+
+    //// function without return value and with parameters
+    // shows a "dummy" account if one exists;
+    // will only show the last created account
     private static void viewMyProfile(Profile profile) {
         if (profile != null) {
             System.out.println("Profile No: " + profile);
@@ -99,7 +124,6 @@ public class Main {
         }
     }
 
-    ///////////////////////////////////////
     private static void openChat() {
 
         while (true) {
@@ -115,6 +139,8 @@ public class Main {
         }
     }
 
+    //// function with return value and without parameters
+    // small but valid conversation with "computer"
     private static String showComputerAnswer() {
         double computerAnswer = Math.random();
         String[] answers = {"Hello!", "Hi.", "Greetings.", "Good afternoon", "How are you?", "How is it going?", "What`s new?", "What`s up?", "Bye.", "Goodbye.", "Have a good one!", "Bye-bye.", "=)"};
@@ -159,60 +185,59 @@ public class Main {
         return answers[12];
     }
 
-        public static void clearScreen () {
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
+    // only for the reference, does nothing
+    public static void clearScreen () {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    // creates a "dummy" account
+    public static void createProfile () {
+        myProfile = new Profile();
+
+        System.out.print("\n\nEnter your first name: ");
+        String firstName = scanner.nextLine();
+        myProfile.firstName = firstName;
+
+        System.out.print("\nEnter your last name: ");
+        String lastName = scanner.nextLine();
+        myProfile.lastName = lastName;
+
+        System.out.print("\nEnter your date of birth: ");
+        String birthday = scanner.nextLine();
+        myProfile.birthday = birthday;
+
+        System.out.print("Choose your gender: \n\t1.Male\n\t2.Female\n\t3.Other\n");
+        int choice = scanner.nextInt();
+        switch (choice) {
+            case 1:
+                myProfile.gender = Gender.male;
+                break;
+            case 2:
+                myProfile.gender = Gender.female;
+                break;
+            case 3:
+                myProfile.gender = Gender.other;
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid choice");
         }
 
-        public static void createProfile () {
-            myProfile = new Profile();
+        scanner.nextLine();
 
-            System.out.print("\n\nEnter your first name: ");
-            String firstName = scanner.nextLine();
-            myProfile.firstName = firstName;
+        System.out.print("\nEnter your place of birth: ");
+        String placeOfBirth = scanner.nextLine();
+        myProfile.placeOfBirth = placeOfBirth;
 
-            System.out.print("\nEnter your last name: ");
-            String lastName = scanner.nextLine();
-            myProfile.lastName = lastName;
+        System.out.print("\n\n\nThe profile is successfully created!\n\n\n");
 
-            System.out.print("\nEnter your date of birth: ");
-            String birthday = scanner.nextLine();
-            myProfile.birthday = birthday;
+    }
 
-            System.out.print("Choose your gender: \n\t1.Male\n\t2.Female\n\t3.Other\n");
-            int choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    myProfile.gender = Gender.male;
-                    break;
-                case 2:
-                    myProfile.gender = Gender.female;
-                    break;
-                case 3:
-                    myProfile.gender = Gender.other;
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid choice");
-            }
 
-            scanner.nextLine();
-
-            System.out.print("\nEnter your place of birth: ");
-            String placeOfBirth = scanner.nextLine();
-            myProfile.placeOfBirth = placeOfBirth;
-
-            System.out.print("\n\n\nThe profile is successfully created!\n\n\n");
-
+    public static void main (String[]args) {
+        while (true) {
+            displayMainMenu();
+            makeChoice();
         }
-
-
-        public static void main (String[]args) {
-
-            while (true) {
-                displayMainMenu();
-                makeChoice();
-            }
-
-
-        }
+    }
 }
