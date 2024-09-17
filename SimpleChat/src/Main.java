@@ -132,6 +132,19 @@ public class Main {
             }
         } else if (message.equals("Hello") || message.equals("Hi")) {
             if (computerAnswer < 0.25 && computerAnswer > 0.0) {
+                return answers[4];
+            } else if (computerAnswer < 0.5 && computerAnswer > 0.25) {
+                return answers[5];
+            } else if (computerAnswer < 0.75 && computerAnswer > 0.5) {
+                return answers[6];
+            } else if (computerAnswer < 0.99 && computerAnswer > 0.75) {
+                return answers[7];
+            } else {
+                return answers[12];
+            }
+        }
+        else if (message.equals(" ") || message.equals("\n")){
+            if (computerAnswer < 0.25 && computerAnswer > 0.0) {
                 return answers[0];
             } else if (computerAnswer < 0.5 && computerAnswer > 0.25) {
                 return answers[1];
