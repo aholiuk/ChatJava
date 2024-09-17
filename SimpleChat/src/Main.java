@@ -52,7 +52,7 @@ public class Main {
         }
 
     }
-///////////////////////////////////////////////
+/////////////////////////////////////////////
 
     public static void displayMainMenu() {
         System.out.print("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tWELCOME TO SIMPLE CHAT\n\n\n\n" +
