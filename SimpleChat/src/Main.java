@@ -10,7 +10,6 @@ public class Main {
     static Profile myProfile;
     static String message = "";
 
-
     public static void drawAppearance() {
         if (message.equals(null)) {
             for (int i = 0; i < height; i++) {
