@@ -9,6 +9,7 @@ public class Main {
     static int height = 100;
     static Profile myProfile;
     static String message = "";
+    static int score = 0;
 
     // function does not work as supposed and very hard coded
     public static void drawAppearance() {
@@ -62,7 +63,12 @@ public class Main {
                 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t1.Open chat\n" +
                 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t2.View my profile\n" +
                 "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t3.Create profile\n" +
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t4.Play mini games\n");
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t4.Play mini games\n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t5.Exit program\n");
+    }
+
+    private static void exitProgram() {
+        System.exit(0);
     }
 
     // executes the menu function
@@ -82,6 +88,8 @@ public class Main {
             case 4:
                 playMiniGames();
                 break;
+            case 5:
+                exitProgram();
             default:
                 throw new IllegalArgumentException("Invalid choice");
 
@@ -90,8 +98,8 @@ public class Main {
 
     private static void playMiniGames() {
         System.out.println("Choose a game:\n1.Rock Paper Scissors\n2.Tic Tac Toe");
-        scanner.nextLine();
         int choice = scanner.nextInt();
+        scanner.nextLine();
         switch (choice) {
             case 1:
                 rockPaperScissors();
@@ -107,7 +115,74 @@ public class Main {
     private static void ticTacToe() {
     }
 
+    // simple rock paper scissors game
     private static void rockPaperScissors() {
+        boolean exit = false;
+        while (true) {
+            if (!exit){
+                double computerMove = Math.random();
+                String computerShow = "";
+                System.out.println("\n\n\n\nChoose your move: ");
+                char move = scanner.nextLine().charAt(0);
+                if (computerMove <= 0.33) {
+                    computerShow = "SCISSORS";
+                } else if (computerMove <= 0.66) {
+                    computerShow = "PAPER";
+                } else {
+                    computerShow = "ROCK";
+                }
+                switch (move) {
+                    case 'S', 's':
+                        System.out.println("\n\nYour move:\tSCISSORS");
+                        if (computerShow.equals("SCISSORS")) {
+                            System.out.println("Computer move:\t" + computerShow + "\n\nTie");
+                        } else if (computerShow.equals("PAPER")) {
+                            System.out.println("Computer move:\t" + computerShow + "\n\nYou win!");
+                            score++;
+                        } else {
+                            System.out.println("Computer move:\t" + computerShow + "\n\nYou lose!");
+                        }
+                        break;
+                    case 'P', 'p':
+                        System.out.println("\n\nYour move:\tPAPER");
+                        if (computerShow.equals("PAPER")) {
+                            System.out.println("Computer move:\t" + computerShow + "\n\nTie");
+                        } else if (computerShow.equals("ROCK")) {
+                            System.out.println("Computer move:\t" + computerShow + "\n\nYou win!");
+                            score++;
+                        } else {
+                            System.out.println("Computer move:\t" + computerShow + "\n\nYou lose!");
+                        }
+                        break;
+                    case 'R', 'r':
+                        System.out.println("\n\nYour move:\tROCK");
+                        if (computerShow.equals("ROCK")) {
+                            System.out.println("Computer move:\t" + computerShow + "\n\nTie");
+                        } else if (computerShow.equals("SCISSORS")) {
+                            System.out.println("Computer move:\t" + computerShow + "\n\nYou win!");
+                            score++;
+                        } else {
+                            System.out.println("Computer move:\t" + computerShow + "\n\nYou lose!");
+                        }
+                    case 'e':
+                        exit = true;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Invalid move");
+                }
+                System.out.println(showScore(score));
+            }
+            else {
+                break;
+            }
+        }
+
+    }
+
+    //// function with return value and with parameters
+    // just shows your score
+    public static String showScore(int score){
+        return "\nYour score is: " + score;
     }
 
     //// function without return value and with parameters
@@ -143,46 +218,54 @@ public class Main {
     // small but valid conversation with "computer"
     private static String showComputerAnswer() {
         double computerAnswer = Math.random();
-        String[] answers = {"Hello!", "Hi.", "Greetings.", "Good afternoon", "How are you?", "How is it going?", "What`s new?", "What`s up?", "Bye.", "Goodbye.", "Have a good one!", "Bye-bye.", "=)"};
-        if (message.equals("Goodbye") || message.equals("Bye-bye") || message.equals("Bye")) {
-            if (computerAnswer < 0.25 && computerAnswer > 0.0) {
-                return answers[8];
-            } else if (computerAnswer < 0.5 && computerAnswer > 0.25) {
-                return answers[9];
-            } else if (computerAnswer < 0.75 && computerAnswer > 0.5) {
-                return answers[10];
-            } else if (computerAnswer < 0.99 && computerAnswer > 0.75) {
-                return answers[11];
-            } else {
+        String[] answers = {"Hello!", "Hi", "Greetings", "Good afternoon", "How are you?", "How is it going?", "What`s new?", "What`s up?", "Bye", "Goodbye", "Have a good one!", "Bye-bye", "=)",
+                            "I am glad to hear that", "So sorry that you feel this way", "Same"};
+        switch (message) {
+            case "Goodbye", "Bye-bye", "Bye":
+                if (computerAnswer < 0.25 && computerAnswer > 0.0) {
+                  return answers[8];
+                } else if (computerAnswer < 0.5 && computerAnswer > 0.25) {
+                  return answers[9];
+                } else if (computerAnswer < 0.75 && computerAnswer > 0.5) {
+                  return answers[10];
+                } else if (computerAnswer < 0.99 && computerAnswer > 0.75) {
+                  return answers[11];
+                } else {
+                  return answers[12];
+                }
+            case "Hello", "Hi":
+                if (computerAnswer < 0.25 && computerAnswer > 0.0) {
+                  return answers[4];
+                } else if (computerAnswer < 0.5 && computerAnswer > 0.25) {
+                  return answers[5];
+                } else if (computerAnswer < 0.75 && computerAnswer > 0.5) {
+                  return answers[6];
+                } else if (computerAnswer < 0.99 && computerAnswer > 0.75) {
+                  return answers[7];
+                } else {
+                  return answers[12];
+                }
+            case " ", "\n":
+                if (computerAnswer < 0.25 && computerAnswer > 0.0) {
+                  return answers[0];
+                } else if (computerAnswer < 0.5 && computerAnswer > 0.25) {
+                  return answers[1];
+                } else if (computerAnswer < 0.75 && computerAnswer > 0.5) {
+                  return answers[2];
+                } else if (computerAnswer < 0.99 && computerAnswer > 0.75) {
+                  return answers[3];
+                } else {
+                  return answers[12];
+                }
+            case "Good":
+                return answers[13];
+            case "Bad":
+                return answers[14];
+            case "So-so", "Could have been better":
+                return answers[15];
+            default:
                 return answers[12];
-            }
-        } else if (message.equals("Hello") || message.equals("Hi")) {
-            if (computerAnswer < 0.25 && computerAnswer > 0.0) {
-                return answers[4];
-            } else if (computerAnswer < 0.5 && computerAnswer > 0.25) {
-                return answers[5];
-            } else if (computerAnswer < 0.75 && computerAnswer > 0.5) {
-                return answers[6];
-            } else if (computerAnswer < 0.99 && computerAnswer > 0.75) {
-                return answers[7];
-            } else {
-                return answers[12];
-            }
         }
-        else if (message.equals(" ") || message.equals("\n")){
-            if (computerAnswer < 0.25 && computerAnswer > 0.0) {
-                return answers[0];
-            } else if (computerAnswer < 0.5 && computerAnswer > 0.25) {
-                return answers[1];
-            } else if (computerAnswer < 0.75 && computerAnswer > 0.5) {
-                return answers[2];
-            } else if (computerAnswer < 0.99 && computerAnswer > 0.75) {
-                return answers[3];
-            } else {
-                return answers[12];
-            }
-        }
-        return answers[12];
     }
 
     // only for the reference, does nothing
