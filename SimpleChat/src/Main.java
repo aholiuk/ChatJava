@@ -164,6 +164,7 @@ public class Main {
                         } else {
                             System.out.println("Computer move:\t" + computerShow + "\n\nYou lose!");
                         }
+                        break;
                     case 'e':
                         exit = true;
                         break;
@@ -279,16 +280,13 @@ public class Main {
         myProfile = new Profile();
 
         System.out.print("\n\nEnter your first name: ");
-        String firstName = scanner.nextLine();
-        myProfile.firstName = firstName;
+        myProfile.firstName = scanner.nextLine();
 
         System.out.print("\nEnter your last name: ");
-        String lastName = scanner.nextLine();
-        myProfile.lastName = lastName;
+        myProfile.lastName = scanner.nextLine();
 
         System.out.print("\nEnter your date of birth: ");
-        String birthday = scanner.nextLine();
-        myProfile.birthday = birthday;
+        myProfile.birthday = scanner.nextLine();
 
         System.out.print("Choose your gender: \n\t1.Male\n\t2.Female\n\t3.Other\n");
         int choice = scanner.nextInt();
@@ -309,8 +307,7 @@ public class Main {
         scanner.nextLine();
 
         System.out.print("\nEnter your place of birth: ");
-        String placeOfBirth = scanner.nextLine();
-        myProfile.placeOfBirth = placeOfBirth;
+        myProfile.placeOfBirth = scanner.nextLine();
 
         System.out.print("\n\n\nThe profile is successfully created!\n\n\n");
 
